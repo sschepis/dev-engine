@@ -1,0 +1,99 @@
+{
+  "name": "@sschepis/dev-engine",
+  "version": "1.0.0",
+  "description": "State-machine-driven agentic workflow for software development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "dev-engine": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./adapters": {
+      "import": "./dist/adapters/OpenClawAdapter.js",
+      "types": "./dist/adapters/OpenClawAdapter.d.ts"
+    },
+    "./interfaces": {
+      "import": "./dist/interfaces/index.js",
+      "types": "./dist/interfaces/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core/DevEngine.js",
+      "types": "./dist/core/DevEngine.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist coverage benchmarks/output benchmarks/results",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "benchmark": "npx ts-node --esm benchmarks/run-all.ts",
+    "benchmark:speed": "npx ts-node --esm benchmarks/suites/speed.benchmark.ts",
+    "benchmark:quality": "npx ts-node --esm benchmarks/suites/quality.benchmark.ts",
+    "benchmark:dry": "npx ts-node --esm benchmarks/run-all.ts --dry-run"
+  },
+  "keywords": [
+    "ai",
+    "code-generation",
+    "agent",
+    "llm",
+    "openai",
+    "typescript",
+    "automation",
+    "development",
+    "testing",
+    "openclaw"
+  ],
+  "author": "OpenClaw",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sschepis/dev-engine"
+  },
+  "bugs": {
+    "url": "https://github.com/sschepis/dev-engine/issues"
+  },
+  "homepage": "https://github.com/sschepis/dev-engine#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "SKILL.md",
+    "README.md"
+  ],
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "@types/jest": "^29.5.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  }
+}
